@@ -1,4 +1,4 @@
-const readline = require('readline');
+const readline = require("readline");
 const rl = readline.createInterface(process.stdin, process.stdout);
 
 function ask(questionText) {
@@ -7,14 +7,8 @@ function ask(questionText) {
   });
 }
 
-
 start();
-
-
-
-
-
-
+// starting the game
 async function start() {
   let min = 1;
   let max = 100;
@@ -22,21 +16,21 @@ async function start() {
   console.log(
     "Let's play a game where you (human) make up a number and I (computer) try to guess it."
   );
+  // picking the number
   console.log(`Choose secret number between ${min} to ${max}`);
-  
+
   let secretNumber = await ask(
     "What is your secret number?\nI won't peek, I promise...\n"
   );
 
   console.log("You entered: " + secretNumber);
-
+  // actually running game
   let gamerun = true;
   while (gamerun) {
     let center = Math.floor((max - min) / 2 + min);
     // asking questions to for the number
     let yesno = await ask(`Is your number ${center} y or n `);
     if ("y" == yesno) {
-
       if (secretNumber != center) {
         console.log("what a loser cheating is bad");
         continue;
@@ -48,14 +42,13 @@ async function start() {
         console.log("what a loser cheating is bad");
         continue;
       }
-      
+
       // asking higher or lower
       let higherorlower = await ask("Is it higher or lower ");
       if ("higher" == higherorlower && center > secretNumber) {
         console.log("Cheater Cheater ");
         continue;
-      } 
-      else if ("lower" == higherorlower && center < secretNumber) {
+      } else if ("lower" == higherorlower && center < secretNumber) {
         console.log("Cheater Cheater");
         continue;
       }
@@ -63,9 +56,7 @@ async function start() {
       if ("higher" == higherorlower) {
         console.log("higher");
         min = center + 1;
-}
-
-else if ("lower" == higherorlower) {
+      } else if ("lower" == higherorlower) {
         console.log("lower");
         max = center;
         console.log(`${max}`);
